@@ -1,6 +1,6 @@
 # Stellar Memoize
 
-[![Tests](https://github.com/stellarwp/memoize/workflows/Tests/badge.svg)](https://github.com/stellarwp/memoize/actions?query=branch%3Amain) [![Static Analysis](https://github.com/stellarwp/memoize/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/stellarwp/memoize/actions/workflows/static-analysis.yml)
+[![Tests](https://github.com/stellarwp/memoize/workflows/Tests/badge.svg)](https://github.com/stellarwp/memoize/actions?query=branch%3Amain) [![PHPCS](https://github.com/stellarwp/memoize/actions/workflows/phpcs.yml/badge.svg)](https://github.com/stellarwp/memoize/actions/workflows/phpcs.yml) [![PHPStan](https://github.com/stellarwp/memoize/actions/workflows/phpstan.yml/badge.svg)](https://github.com/stellarwp/memoize/actions/workflows/phpstan.yml) [![Compatibility](https://github.com/stellarwp/memoize/actions/workflows/compatibility.yml/badge.svg)](https://github.com/stellarwp/memoize/actions/workflows/compatibility.yml)
 
 A flexible memoization library for memory caching.
 
