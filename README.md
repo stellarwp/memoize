@@ -33,9 +33,9 @@ use StellarWP\Memoize\Memoize;
 
 Memoize::set('foo', 'bar');
 
-$value = Memoize::get('foo');
-
-echo $value; // Outputs: bar
+if (Memoize::has('foo')) {
+    echo Memoize::get('foo'); // Outputs: bar
+}
 ```
 
 ### Setting a nested structure
