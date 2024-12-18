@@ -36,6 +36,9 @@ Memoize::set('foo', 'bar');
 if (Memoize::has('foo')) {
     echo Memoize::get('foo'); // Outputs: bar
 }
+
+// Unsets foo from the memoization cache.
+Memoize::forget('foo');
 ```
 
 ### Setting a nested structure
