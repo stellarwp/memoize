@@ -1,0 +1,65 @@
+{
+  "name": "stellarwp/memoize",
+  "description": "A flexible memoization library for memory caching.",
+  "type": "library",
+  "license": "GPL-2.0",
+  "platform": {
+    "php": "7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "StellarWP\\Memoize\\": "src/Memoize/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "StellarWP\\Memoize\\Tests\\": "tests/",
+      "StellarWP\\Memoize\\Tests\\Helper\\": "tests/_support/Helper/",
+      "StellarWP\\Memoize\\Tests\\Support\\": "tests/_support/Support/"
+    }
+  },
+  "authors": [
+    {
+      "name": "StellarWP",
+      "email": "dev@stellarwp.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "stellarwp/arrays": "^1.2"
+  },
+  "require-dev": {
+    "lucatume/wp-browser": "^3.7",
+    "php-stubs/wordpress-stubs": "6.7.1",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "stellarwp/coding-standards": "^2.0",
+    "symfony/event-dispatcher-contracts": "^2.5.1",
+    "symfony/string": "^5.4",
+    "szepeviktor/phpstan-wordpress": "^1.1"
+  },
+  "scripts": {
+    "lint": "vendor/bin/phpcs",
+    "format": "vendor/bin/phpcbf",
+    "compatibility:php-7.4": "phpcs ./src -s --standard=PHPCompatibilityWP --runtime-set testVersion 7.4",
+    "compatibility:php-8.0": "phpcs ./src -s --standard=PHPCompatibilityWP --runtime-set testVersion 8.0",
+    "compatibility:php-8.1": "phpcs ./src -s --standard=PHPCompatibilityWP --runtime-set testVersion 8.1",
+    "compatibility:php-8.2": "phpcs ./src -s --standard=PHPCompatibilityWP --runtime-set testVersion 8.2",
+    "compatibility": [
+      "@compatibility:php-7.4",
+      "@compatibility:php-8.0",
+      "@compatibility:php-8.1",
+      "@compatibility:php-8.2"
+    ],
+    "test:analysis": [
+      "phpstan analyse -c phpstan.neon.dist --memory-limit=512M"
+    ]
+  },
+  "scripts-descriptions": {
+    "test:analysis": "Run static code analysis."
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
