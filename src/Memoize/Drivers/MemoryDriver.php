@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace StellarWP\Memoize\Drivers;
 
+use Closure;
 use StellarWP\Arrays\Arr;
 
-class MemoryDriver implements Contracts\DriverInterface
+class MemoryDriver extends AbstractDriver
 {
     /**
      * @var array
@@ -19,10 +20,25 @@ class MemoryDriver implements Contracts\DriverInterface
     public function get(?string $key = null)
     {
         if (!$key) {
+            static::$cache = $this->recursivelyResolveClosures(static::$cache);
+
             return static::$cache;
         }
 
-        return Arr::get(static::$cache, $key);
+        $value = Arr::get(static::$cache, $key);
+
+        if ( is_array( $value ) ) {
+            $value = $this->recursivelyResolveClosures($value);
+            $this->set($key, $value);
+            return $value;
+        }
+
+        if ( $value instanceof Closure ) {
+            $value = $value();
+            $this->set($key, $value);
+        }
+
+        return $value;
     }
 
     /**
@@ -30,7 +46,7 @@ class MemoryDriver implements Contracts\DriverInterface
      */
     public function set(string $key, $value): void
     {
-        static::$cache = Arr::add(static::$cache, $key, $value);
+        static::$cache = Arr::set(static::$cache, explode('.', $key), $value);
     }
 
     /**
