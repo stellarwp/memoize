@@ -27,13 +27,13 @@ class MemoryDriver extends AbstractDriver
 
         $value = Arr::get(static::$cache, $key);
 
-        if ( is_array( $value ) ) {
+        if (is_array($value)) {
             $value = $this->recursivelyResolveClosures($value);
             $this->set($key, $value);
             return $value;
         }
 
-        if ( $value instanceof Closure ) {
+        if ($value instanceof Closure) {
             $value = $value();
             $this->set($key, $value);
         }

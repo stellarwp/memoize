@@ -95,7 +95,7 @@ class WpCacheDriver extends AbstractDriver
     {
         // If the value is a Closure, we need to store it in memory cache and store a value
         // in wp_cache that indicates we should look for it there.
-        if ( $value instanceof Closure ) {
+        if ($value instanceof Closure) {
             static::$closure_cache = Arr::set(static::$closure_cache, explode('.', $key), $value);
             return;
         }
