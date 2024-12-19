@@ -8,14 +8,14 @@ use Closure;
 use StellarWP\Arrays\Arr;
 use StellarWP\Memoize\Contracts\DriverInterface;
 
-class MemoryDriver implements DriverInterface
+final class MemoryDriver implements DriverInterface
 {
     use Traits\ClosureResolver;
 
     /**
      * @var array
      */
-    protected array $cache = [];
+    private array $cache = [];
 
     /**
      * @inheritDoc

@@ -2,11 +2,12 @@
 namespace StellarWP\Memoize;
 
 use StellarWP\Memoize\Tests\Helper\MemoizeTestCase;
+use StellarWP\Memoize\Contracts\MemoizerInterface;
 use StellarWP\Memoize\Drivers\MemoryDriver;
 
-class ClosureTest extends MemoizeTestCase
+final class ClosureTest extends MemoizeTestCase
 {
-    private $memoizer;
+    private MemoizerInterface $memoizer;
 
     public function _setUp(): void
     {
