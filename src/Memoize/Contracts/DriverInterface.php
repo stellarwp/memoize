@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace StellarWP\Memoize\Drivers\Contracts;
+namespace StellarWP\Memoize\Contracts;
 
 interface DriverInterface
 {

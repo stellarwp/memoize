@@ -6,15 +6,16 @@ namespace StellarWP\Memoize\Drivers;
 
 use Closure;
 use StellarWP\Arrays\Arr;
+use StellarWP\Memoize\Contracts\DriverInterface;
 
-class MemoryDriver implements Contracts\DriverInterface
+class MemoryDriver implements DriverInterface
 {
     use Traits\ClosureResolver;
 
     /**
      * @var array
      */
-    protected static array $cache = [];
+    protected array $cache = [];
 
     /**
      * @inheritDoc
@@ -22,12 +23,12 @@ class MemoryDriver implements Contracts\DriverInterface
     public function get(?string $key = null)
     {
         if (!$key) {
-            static::$cache = $this->recursivelyResolveClosures(static::$cache);
+            $this->cache = $this->recursivelyResolveClosures($this->cache);
 
-            return static::$cache;
+            return $this->cache;
         }
 
-        $value = Arr::get(static::$cache, $key);
+        $value = Arr::get($this->cache, $key);
 
         if (is_array($value)) {
             $value = $this->recursivelyResolveClosures($value);
@@ -48,7 +49,7 @@ class MemoryDriver implements Contracts\DriverInterface
      */
     public function set(string $key, $value): void
     {
-        static::$cache = Arr::set(static::$cache, explode('.', $key), $value);
+        $this->cache = Arr::set($this->cache, explode('.', $key), $value);
     }
 
     /**
@@ -56,7 +57,7 @@ class MemoryDriver implements Contracts\DriverInterface
      */
     public function has(string $key): bool
     {
-        return Arr::has(static::$cache, $key);
+        return Arr::has($this->cache, $key);
     }
 
     /**
@@ -65,9 +66,9 @@ class MemoryDriver implements Contracts\DriverInterface
     public function forget(?string $key = null): void
     {
         if ($key) {
-            Arr::forget(static::$cache, $key);
+            Arr::forget($this->cache, $key);
         } else {
-            static::$cache = [];
+            $this->cache = [];
         }
     }
 }
