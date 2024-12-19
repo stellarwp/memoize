@@ -10,8 +10,6 @@ use StellarWP\Memoize\Contracts\DriverInterface;
 
 final class MemoryDriver implements DriverInterface
 {
-    use Traits\ClosureResolver;
-
     /**
      * @var array
      */
@@ -23,25 +21,10 @@ final class MemoryDriver implements DriverInterface
     public function get(?string $key = null)
     {
         if (!$key) {
-            $this->cache = $this->recursivelyResolveClosures($this->cache);
-
             return $this->cache;
         }
 
-        $value = Arr::get($this->cache, $key);
-
-        if (is_array($value)) {
-            $value = $this->recursivelyResolveClosures($value);
-            $this->set($key, $value);
-            return $value;
-        }
-
-        if ($value instanceof Closure) {
-            $value = $value();
-            $this->set($key, $value);
-        }
-
-        return $value;
+        return Arr::get($this->cache, $key);
     }
 
     /**
@@ -49,6 +32,10 @@ final class MemoryDriver implements DriverInterface
      */
     public function set(string $key, $value): void
     {
+        if ($value instanceof Closure) {
+            $value = $value();
+        }
+
         $this->cache = Arr::set($this->cache, explode('.', $key), $value);
     }
 

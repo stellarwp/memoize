@@ -129,9 +129,8 @@ $memoizer->forget();
 
 ### Caching with closures
 
-Memoize also supports caching closures as values that get resolved when retrieved from the cache.
+Memoize also supports using closures as values that get resolved before setting in the cache.
 
-#### Simple example
 ```php
 use StellarWP\Memoize\Memoizer;
 
@@ -142,33 +141,6 @@ $memoizer->set('foo', static function () {
 });
 
 echo $memoizer->get('foo'); // Outputs: bar
-```
-
-#### Nested example
-
-If you get a key that contains multiple closures in its tree, it will traverse the tree and resolve all of those closures.
-
-```php
-use StellarWP\Memoize\Memoizer;
-
-$memoizer = new Memoizer();
-
-$memoizer->set('stellarwp.bork', static function () {
-    return 'lol';
-});
-
-$memoizer->set('stellarwp.foo.bar', static function () {
-    return 'baz';
-});
-
-print_r( $memoizer->get('stellarwp') );
-// Outputs:
-// [
-//     'bork' => 'lol',
-//     'foo' => [
-//         'bar' => 'baz',
-//     ],
-// ]
 ```
 
 ### Using with a dependency injection container
