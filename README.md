@@ -267,7 +267,7 @@ Memoize comes with a single driver out of the box, but you can also create your 
 
 ### MemoryDriver
 
-The `MemoryDriver` is a simple in-memory driver is in-memory memoization. Basically, contains an array property in the driver that holds the memoized values. You can manually specify the use of this driver or any other driver like so:
+The `MemoryDriver` is a simple in-memory driver. Basically, contains an array property in the driver that holds the memoized values. You can manually specify the use of this driver or any other driver like so:
 
 ```php
 use StellarWP\Memoize\Memoizer;
