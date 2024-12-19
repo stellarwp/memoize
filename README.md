@@ -128,6 +128,46 @@ function my_expensive_function() {
 }
 ```
 
+### Caching with closures
+
+Memoize also supports caching closures as values that get resolved when retrieved from the cache.
+
+#### Simple example
+```php
+use StellarWP\Memoize\Memoize;
+
+Memoize::set('foo', static function () {
+    return 'bar';
+});
+
+echo Memoize::get('foo'); // Outputs: bar
+```
+
+#### Nested example
+
+If you get a key that contains multiple closures in its tree, it will traverse the tree and resolve all of those closures.
+
+```php
+use StellarWP\Memoize\Memoize;
+
+Memoize::set('stellarwp.bork', static function () {
+    return 'lol';
+});
+
+Memoize::set('stellarwp.foo.bar', static function () {
+    return 'baz';
+});
+
+print_r( Memoize::get('stellarwp') );
+// Outputs:
+// [
+//     'bork' => 'lol',
+//     'foo' => [
+//         'bar' => 'baz',
+//     ],
+// ]
+```
+
 ## Drivers
 
 Memoize comes with a few drivers out of the box, but you can also create your own.
