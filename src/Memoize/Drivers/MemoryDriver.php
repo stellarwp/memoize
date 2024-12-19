@@ -7,8 +7,10 @@ namespace StellarWP\Memoize\Drivers;
 use Closure;
 use StellarWP\Arrays\Arr;
 
-class MemoryDriver extends AbstractDriver
+class MemoryDriver implements Contracts\DriverInterface
 {
+    use Traits\ClosureResolver;
+
     /**
      * @var array
      */

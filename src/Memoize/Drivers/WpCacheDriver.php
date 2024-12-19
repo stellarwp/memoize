@@ -8,8 +8,10 @@ use Closure;
 use StellarWP\Arrays\Arr;
 use StellarWP\Memoize\Config;
 
-class WpCacheDriver extends AbstractDriver
+class WpCacheDriver implements Contracts\DriverInterface
 {
+    use Traits\ClosureResolver;
+
     /**
      * @var string
      */

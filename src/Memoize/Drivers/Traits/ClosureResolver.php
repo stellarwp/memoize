@@ -2,33 +2,12 @@
 
 declare(strict_types=1);
 
-namespace StellarWP\Memoize\Drivers;
+namespace StellarWP\Memoize\Drivers\Traits;
 
 use Closure;
-use StellarWP\Arrays\Arr;
 
-abstract class AbstractDriver implements Contracts\DriverInterface
+trait ClosureResolver
 {
-    /**
-     * @inheritDoc
-     */
-    abstract public function get(?string $key = null);
-
-    /**
-     * @inheritDoc
-     */
-    abstract public function set(string $key, $value): void;
-
-    /**
-     * @inheritDoc
-     */
-    abstract public function has(string $key): bool;
-
-    /**
-     * @inheritDoc
-     */
-    abstract public function forget(?string $key = null): void;
-
     /**
      * Recursively resolves closures in the cache.
      *
