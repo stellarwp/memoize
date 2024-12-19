@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace StellarWP\Memoize;
+namespace StellarWP\Memoize\Contracts;
 
-final class Memoize
+interface MemoizerInterface
 {
     /**
      * Get a value from the memoization cache.
@@ -12,10 +12,7 @@ final class Memoize
      * @param ?string $key The cache key using dot notation. If null, the entire cache will be returned.
      * @return mixed
      */
-    public static function get(?string $key = null)
-    {
-        return Config::getDriver()->get($key);
-    }
+    public function get(?string $key = null);
 
     /**
      * Set a value in the memoization cache.
@@ -24,21 +21,15 @@ final class Memoize
      * @param mixed $value The value to store in the cache.
      * @return void
      */
-    public static function set(string $key, $value): void
-    {
-        Config::getDriver()->set($key, $value);
-    }
+    public function set(string $key, $value): void;
 
     /**
      * Check if a key exists in the memoization cache.
      *
      * @param string $key The cache key using dot notation.
-     * @return boolean
+     * @return bool
      */
-    public static function has(string $key): bool
-    {
-        return Config::getDriver()->has($key);
-    }
+    public function has(string $key): bool;
 
     /**
      * Remove a key from the memoization cache.
@@ -46,8 +37,5 @@ final class Memoize
      * @param ?string $key The cache key using dot notation. If null, the entire cache will be cleared.
      * @return void
      */
-    public static function forget(?string $key = null): void
-    {
-        Config::getDriver()->forget($key);
-    }
+    public function forget(?string $key = null): void;
 }
