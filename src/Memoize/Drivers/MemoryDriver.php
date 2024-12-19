@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace StellarWP\Memoize\Drivers;
 
+use Closure;
 use StellarWP\Arrays\Arr;
+use StellarWP\Memoize\Contracts\DriverInterface;
 
-class MemoryDriver implements Contracts\DriverInterface
+final class MemoryDriver implements DriverInterface
 {
     /**
      * @var array
      */
-    protected static array $cache = [];
+    private array $cache = [];
 
     /**
      * @inheritDoc
@@ -19,10 +21,10 @@ class MemoryDriver implements Contracts\DriverInterface
     public function get(?string $key = null)
     {
         if (!$key) {
-            return static::$cache;
+            return $this->cache;
         }
 
-        return Arr::get(static::$cache, $key);
+        return Arr::get($this->cache, $key);
     }
 
     /**
@@ -30,7 +32,11 @@ class MemoryDriver implements Contracts\DriverInterface
      */
     public function set(string $key, $value): void
     {
-        static::$cache = Arr::add(static::$cache, $key, $value);
+        if ($value instanceof Closure) {
+            $value = $value();
+        }
+
+        $this->cache = Arr::set($this->cache, explode('.', $key), $value);
     }
 
     /**
@@ -38,7 +44,7 @@ class MemoryDriver implements Contracts\DriverInterface
      */
     public function has(string $key): bool
     {
-        return Arr::has(static::$cache, $key);
+        return Arr::has($this->cache, $key);
     }
 
     /**
@@ -47,9 +53,9 @@ class MemoryDriver implements Contracts\DriverInterface
     public function forget(?string $key = null): void
     {
         if ($key) {
-            Arr::forget(static::$cache, $key);
+            Arr::forget($this->cache, $key);
         } else {
-            static::$cache = [];
+            $this->cache = [];
         }
     }
 }
