@@ -30,6 +30,16 @@ final class PrefixedMemoryDriver implements DriverInterface
     }
 
     /**
+     * Get the set prefix.
+     *
+     * @return string
+     */
+    public function prefix(): string
+    {
+        return $this->prefix;
+    }
+
+    /**
      * @inheritDoc
      */
     public function get(?string $key = null)
