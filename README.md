@@ -247,3 +247,39 @@ use StellarWP\Memoize\Drivers\MemoryDriver;
 
 $memoizer = new Memoizer(new MemoryDriver());
 ```
+## Decorators
+
+Memoize comes with a `PrefixedDriverDecorator` which automatically adds a prefix to your all your keys.
+
+> 💡 The default prefix for the decorator is `stellarwp`, if not specifically configured.
+
+```php
+use StellarWP\Memoize\Memoizer;
+use StellarWP\Memoize\Drivers\MemoryDriver;
+use StellarWP\Memoize\Decorators\PrefixedDriverDecorator;
+use lucatume\DI52\Container;
+
+$decorator = new PrefixedDriverDecorator( new MemoryDriver(), 'myplugin' );
+$memoizer  = new Memoizer( $decorator );
+
+// Or, with a Container like DI52.
+$this->container->when( PrefixedDriverDecorator::class )
+                ->needs( '$prefix')
+                ->give( static fn(): string => 'mypluginslug' );
+
+$this->container->singletonDecorators( DriverInterface::class, [
+    MemoryDriver::class,
+    PrefixedDriverDecorator::class
+] );
+
+$this->container->bind( MemoizerInterface::class, Memoizer::class );
+
+$memoizer = $this->container->get( MemoizerInterface::class );
+
+// Under the hood, this is automatically stored as mypluginslug.foo.
+$memoizer->set( 'foo', 'bar' );
+
+// Under the hood, this is automatically stored as mypluginslug.my.custom.key.
+$memoizer->set( 'my.custom.key', 'value' );
+$value = $memoizer->get( 'my.custom.key' );
+```

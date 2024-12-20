@@ -2,7 +2,14 @@
 
 namespace StellarWP\Memoize\Tests\Helper;
 
-class MemoizeTestCase extends \Codeception\TestCase\WPTestCase {
+use lucatume\WPBrowser\TestCase\WPTestCase;
+
+/**
+ * @mixin \Codeception\Test\Unit
+ * @mixin \PHPUnit\Framework\TestCase
+ * @mixin \Codeception\PHPUnit\TestCase
+ */
+class MemoizeTestCase extends WPTestCase {
     protected $backupGlobals = false;
 }
 

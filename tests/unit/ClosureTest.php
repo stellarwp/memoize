@@ -1,9 +1,11 @@
 <?php
-namespace StellarWP\Memoize;
 
-use StellarWP\Memoize\Tests\Helper\MemoizeTestCase;
+namespace StellarWP\Memoize\Tests\Unit;
+
 use StellarWP\Memoize\Contracts\MemoizerInterface;
 use StellarWP\Memoize\Drivers\MemoryDriver;
+use StellarWP\Memoize\Memoizer;
+use StellarWP\Memoize\Tests\Helper\MemoizeTestCase;
 
 final class ClosureTest extends MemoizeTestCase
 {
