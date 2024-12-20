@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace StellarWP\Memoize\Tests\Unit;
 
 use StellarWP\Memoize\Contracts\MemoizerInterface;
-use StellarWP\Memoize\Decorators\PrefixedMemoryDriver;
+use StellarWP\Memoize\Decorators\PrefixedDriverDecorator;
 use StellarWP\Memoize\Drivers\MemoryDriver;
 use StellarWP\Memoize\Memoizer;
 use StellarWP\Memoize\Tests\Helper\MemoizeTestCase;
@@ -21,7 +21,7 @@ final class MemoizeTest extends MemoizeTestCase
     {
         return [
             'MemoryDriver' => [new Memoizer(new MemoryDriver())],
-            'PrefixedMemoryDriver' => [new Memoizer(new PrefixedMemoryDriver(new MemoryDriver()))],
+            'PrefixedMemoryDriver' => [new Memoizer(new PrefixedDriverDecorator(new MemoryDriver()))],
         ];
     }
 

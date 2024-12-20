@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace StellarWP\Memoize\Decorators;
 
 use StellarWP\Memoize\Contracts\DriverInterface;
-use StellarWP\Memoize\Drivers\MemoryDriver;
 
 /**
- * A Prefixed Memory Driver Decorator which automatically prefixes
- * all keys with the provided prefix.
+ * A Decorator that prefixes the keys of existing drivers.
  */
-final class PrefixedMemoryDriver implements DriverInterface
+final class PrefixedDriverDecorator implements DriverInterface
 {
-    private MemoryDriver $driver;
+    private DriverInterface $driver;
 
     /**
      * The prefix for keys.
@@ -23,10 +21,10 @@ final class PrefixedMemoryDriver implements DriverInterface
     /**
      * @param string $prefix Prefix all keys.
      */
-    public function __construct(MemoryDriver $driver, string $prefix = 'stellarwp')
+    public function __construct(DriverInterface $driver, string $prefix = 'stellarwp')
     {
         $this->driver = $driver;
-        $this->prefix = $prefix;
+        $this->prefix = trim($prefix);
     }
 
     /**
