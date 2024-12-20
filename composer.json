@@ -36,7 +36,9 @@
     "stellarwp/coding-standards": "^2.0",
     "symfony/event-dispatcher-contracts": "^2.5.1",
     "symfony/string": "^5.4",
-    "szepeviktor/phpstan-wordpress": "^1.1"
+    "szepeviktor/phpstan-wordpress": "^1.1",
+    "phpstan/phpstan-phpunit": "^1.4",
+    "phpstan/extension-installer": "*"
   },
   "scripts": {
     "lint": "vendor/bin/phpcs",
@@ -60,7 +62,15 @@
   },
   "config": {
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "extra": {
+    "phpstan": {
+      "includes": [
+        "extension.neon"
+      ]
     }
   }
 }
