@@ -14,6 +14,7 @@
   "autoload-dev": {
     "psr-4": {
       "StellarWP\\Memoize\\Tests\\": "tests/",
+      "StellarWP\\Memoize\\Tests\\Unit\\": "tests/unit/",
       "StellarWP\\Memoize\\Tests\\Helper\\": "tests/_support/Helper/",
       "StellarWP\\Memoize\\Tests\\Support\\": "tests/_support/Support/"
     }
