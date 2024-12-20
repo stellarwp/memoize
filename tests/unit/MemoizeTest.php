@@ -28,7 +28,7 @@ final class MemoizeTest extends MemoizeTestCase
     /**
      * @dataProvider driverProvider
      */
-    public function testSetsSimpleValue(MemoizerInterface $memoizer)
+    public function testSetsSimpleValue(MemoizerInterface $memoizer): void
     {
         $memoizer->set('foo', 'bar');
         $this->assertEquals('bar', $memoizer->get('foo'));
@@ -37,7 +37,7 @@ final class MemoizeTest extends MemoizeTestCase
     /**
      * @dataProvider driverProvider
      */
-    public function testSetsDeepValue(MemoizerInterface $memoizer)
+    public function testSetsDeepValue(MemoizerInterface $memoizer): void
     {
         $memoizer->set('foo.bar.bork.blarg.moo', 'baz');
         $this->assertEquals('baz', $memoizer->get('foo.bar.bork.blarg.moo'));
@@ -46,7 +46,7 @@ final class MemoizeTest extends MemoizeTestCase
     /**
      * @dataProvider driverProvider
      */
-    public function testForgetsEverything(MemoizerInterface $memoizer)
+    public function testForgetsEverything(MemoizerInterface $memoizer): void
     {
         $memoizer->set('foo.bar.bork.blarg.moo', 'baz');
         $memoizer->forget();
@@ -60,7 +60,7 @@ final class MemoizeTest extends MemoizeTestCase
     /**
      * @dataProvider driverProvider
      */
-    public function testForgetsLeaves(MemoizerInterface $memoizer)
+    public function testForgetsLeaves(MemoizerInterface $memoizer): void
     {
         $memoizer->set('foo.bar.bork.blarg.moo', 'baz');
         $memoizer->set('foo.bar.bork.blarg.oink', 'lol');
@@ -72,7 +72,7 @@ final class MemoizeTest extends MemoizeTestCase
     /**
      * @dataProvider driverProvider
      */
-    public function testForgetsBranches(MemoizerInterface $memoizer)
+    public function testForgetsBranches(MemoizerInterface $memoizer): void
     {
         $memoizer->set('foo.bar.bork.blarg.moo', 'baz');
         $memoizer->set('foo.bar.bork.blarg.oink', 'lol');
@@ -84,7 +84,7 @@ final class MemoizeTest extends MemoizeTestCase
     /**
      * @dataProvider driverProvider
      */
-    public function testForgetsSimpleValues(MemoizerInterface $memoizer)
+    public function testForgetsSimpleValues(MemoizerInterface $memoizer): void
     {
         $memoizer->set('foo', 'baz');
         $memoizer->set('bork', 'lol');
