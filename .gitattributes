@@ -1,6 +1,10 @@
-*               text
-.*              export-ignore
-composer.lock   text -diff
-phpstan.*       export-ignore
-phpunit.*       export-ignore
-tests           export-ignore
+*                       text
+.*                      export-ignore
+/composer.lock          text -diff
+/phpstan.*.yml          export-ignore
+/phpcs.*.yml            export-ignore
+/codeception.*.yml      export-ignore
+/.env.testing*          export-ignore
+/tests                  export-ignore
+/.github                export-ignore
+/.editorconfig           export-ignore
