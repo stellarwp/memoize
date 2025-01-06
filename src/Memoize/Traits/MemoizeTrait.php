@@ -6,12 +6,14 @@ namespace StellarWP\Memoize\Traits;
 
 use Closure;
 use StellarWP\Arrays\Arr;
+use StellarWP\Memoize\Contracts\DriverInterface;
 use StellarWP\Memoize\Contracts\MemoizerInterface;
 
 /**
  * A memory based memoizer trait.
  *
  * @mixin MemoizerInterface
+ * @mixin DriverInterface
  */
 trait MemoizeTrait
 {
