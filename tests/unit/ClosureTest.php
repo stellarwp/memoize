@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StellarWP\Memoize\Tests\Unit;
 
 use StellarWP\Memoize\Contracts\MemoizerInterface;
@@ -16,7 +18,7 @@ final class ClosureTest extends MemoizeTestCase
         $this->memoizer = new Memoizer(new MemoryDriver());
     }
 
-    public function testResolvesClosures()
+    public function testResolvesClosures(): void
     {
         $this->memoizer->set('foo', function () {
             return 'bar';
@@ -29,7 +31,7 @@ final class ClosureTest extends MemoizeTestCase
         $this->assertEquals('bar', $this->memoizer->get('foo.baz'));
     }
 
-    public function testResolvesClosuresRecursively()
+    public function testResolvesClosuresRecursively(): void
     {
         $this->memoizer->set('one', function () {
             return 'bar';
@@ -52,7 +54,7 @@ final class ClosureTest extends MemoizeTestCase
         $this->assertEquals('bar', $cache['three']['baz']['whee']);
     }
 
-    public function testResolvesClosuresRecursivelyWhenGrabbingInTheMiddle()
+    public function testResolvesClosuresRecursivelyWhenGrabbingInTheMiddle(): void
     {
         $this->memoizer->set('bar.baz.whee', function () {
             return 'bar';
