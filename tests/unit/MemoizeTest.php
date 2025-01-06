@@ -19,13 +19,13 @@ final class MemoizeTest extends MemoizeTestCase
      */
     public function driverProvider(): array
     {
-        $memoizerTrait = new class implements MemoizerInterface {
+        $memoizeTrait = new class implements MemoizerInterface {
             use MemoizeTrait;
         };
 
         return [
             'MemoryDriver' => [new Memoizer(new MemoryDriver())],
-            'MemoizeTrait' => [$memoizerTrait],
+            'MemoizeTrait' => [$memoizeTrait],
         ];
     }
 
