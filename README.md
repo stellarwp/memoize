@@ -247,3 +247,50 @@ use StellarWP\Memoize\Drivers\MemoryDriver;
 
 $memoizer = new Memoizer(new MemoryDriver());
 ```
+
+## Traits
+
+The `MemoizeTrait` provides a convenient way to add memoization to your classes, ensuring that cached results are isolated to each instance,
+preventing cross-talk or key collisions between different objects. Ideal for enhancing existing classes with lightweight, instance-specific caching.
+
+> 💡 The MemoizeTrait uses in-memory storage only and cannot be changed.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace StellarWP\MyProject;
+
+use StellarWP\Memoize\MemoizerInterface;
+use StellarWP\Memoize\Traits\MemoizeTrait;
+
+/**
+ * An example class inside your project.
+ */
+class MyProjectClass implements MemoizerInterface
+{
+    use MemoizeTrait;
+
+    public function find( string $id ): string {
+       $result = $this->get( $id );
+
+        if ( ! $result ) {
+            $result = 'some very expensive operation';
+
+            $this->set( $id, $result );
+        }
+
+        return $result;
+    }
+
+    public function delete( string $id ): bool
+    {
+        $this->forget( $id );
+
+        // Run delete operation...
+
+        return true;
+    }
+}
+```
