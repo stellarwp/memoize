@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StellarWP\Memoize;
 
+use InvalidArgumentException;
 use StellarWP\Memoize\Contracts\DriverInterface;
 use StellarWP\Memoize\Contracts\MemoizerInterface;
 use StellarWP\Memoize\Drivers\MemoryDriver;
@@ -37,6 +38,9 @@ final class Memoizer implements MemoizerInterface
      * Get a value from the memoization cache.
      *
      * @param ?string $key The cache key using dot notation. If null, the entire cache will be returned.
+     *
+     * @throws InvalidArgumentException If the key is an empty string.
+     *
      * @return mixed
      */
     public function get(?string $key = null)
@@ -49,6 +53,9 @@ final class Memoizer implements MemoizerInterface
      *
      * @param string $key The cache key using dot notation.
      * @param mixed $value The value to store in the cache.
+     *
+     * @throws InvalidArgumentException If the key is an empty string.
+     *
      * @return void
      */
     public function set(string $key, $value): void
@@ -60,6 +67,9 @@ final class Memoizer implements MemoizerInterface
      * Check if a key exists in the memoization cache.
      *
      * @param string $key The cache key using dot notation.
+     *
+     * @throws InvalidArgumentException If the key is an empty string.
+     *
      * @return boolean
      */
     public function has(string $key): bool
@@ -71,6 +81,9 @@ final class Memoizer implements MemoizerInterface
      * Remove a key from the memoization cache.
      *
      * @param ?string $key The cache key using dot notation. If null, the entire cache will be cleared.
+     *
+     * @throws InvalidArgumentException If the key is an empty string.
+     *
      * @return void
      */
     public function forget(?string $key = null): void

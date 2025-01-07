@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StellarWP\Memoize\Tests\Unit;
 
+use InvalidArgumentException;
 use StellarWP\Memoize\Contracts\MemoizerInterface;
 use StellarWP\Memoize\Drivers\MemoryDriver;
 use StellarWP\Memoize\Memoizer;
@@ -96,4 +97,63 @@ final class MemoizeTest extends MemoizeTestCase
         $this->assertFalse($memoizer->has('foo'));
         $this->assertTrue($memoizer->has('bork'));
     }
+
+    /**
+     * @dataProvider driverProvider
+     */
+    public function testItAllowsEmptyNonNullValues(MemoizerInterface $memoizer): void
+    {
+        $memoizer->set('0', 'baz');
+        $memoizer->set('false', 'lol');
+        $this->assertTrue($memoizer->has('0'));
+        $this->assertTrue($memoizer->has('false'));
+        $this->assertSame('baz', $memoizer->get('0'));
+        $this->assertSame('lol', $memoizer->get('false'));
+
+        $memoizer->forget('0');
+        $memoizer->forget('false');
+        $this->assertFalse($memoizer->has('0'));
+        $this->assertFalse($memoizer->has('false'));
+    }
+
+    /**
+     * @dataProvider driverProvider
+     */
+    public function testItThrowsExceptionSettingEmptyString(MemoizerInterface $memoizer): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Memoize key cannot be an empty string');
+        $memoizer->set('', 'baz');
+    }
+
+    /**
+     * @dataProvider driverProvider
+     */
+    public function testItThrowsExceptionGettingEmptyString(MemoizerInterface $memoizer): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Memoize key cannot be an empty string');
+        $memoizer->get('');
+    }
+
+    /**
+     * @dataProvider driverProvider
+     */
+    public function testItThrowsExceptionHasEmptyString(MemoizerInterface $memoizer): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Memoize key cannot be an empty string');
+        $memoizer->has('');
+    }
+
+    /**
+     * @dataProvider driverProvider
+     */
+    public function testItThrowsExceptionForgettingEmptyString(MemoizerInterface $memoizer): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Memoize key cannot be an empty string');
+        $memoizer->forget('');
+    }
+
 }

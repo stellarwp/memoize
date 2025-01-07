@@ -17,6 +17,7 @@ A flexible memoization library for memory caching.
   - [Using with a dependency injection container](#using-with-a-dependency-injection-container)
 - [Drivers](#drivers)
   - [MemoryDriver](#memorydriver)
+- [Traits](#traits)
 
 ## Memoization
 
