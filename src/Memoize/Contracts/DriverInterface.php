@@ -17,7 +17,7 @@ interface DriverInterface
      *
      * @return mixed
      */
-    public function get(?string $key = null);
+    public function get(?string $key);
 
     /**
      * Set a value in the cache.
@@ -51,5 +51,5 @@ interface DriverInterface
      *
      * @return void
      */
-    public function forget(?string $key = null): void;
+    public function forget(?string $key): void;
 }

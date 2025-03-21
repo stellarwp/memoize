@@ -32,7 +32,7 @@ trait MemoizeTrait
      *
      * @return mixed
      */
-    public function get(?string $key = null)
+    public function get(?string $key)
     {
         if ($key === null) {
             return static::$cached;
@@ -95,7 +95,7 @@ trait MemoizeTrait
      *
      * @return void
      */
-    public function forget(?string $key = null): void
+    public function forget(?string $key): void
     {
         if ($key === '') {
             throw new InvalidArgumentException('Memoize key cannot be an empty string');

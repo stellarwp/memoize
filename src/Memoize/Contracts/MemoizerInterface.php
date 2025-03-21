@@ -17,7 +17,7 @@ interface MemoizerInterface
      *
      * @return mixed
      */
-    public function get(?string $key = null);
+    public function get(?string $key);
 
     /**
      * Set a value in the memoization cache.
@@ -51,5 +51,5 @@ interface MemoizerInterface
      *
      * @return void
      */
-    public function forget(?string $key = null): void;
+    public function forget(?string $key): void;
 }

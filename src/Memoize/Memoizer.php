@@ -29,7 +29,7 @@ final class Memoizer implements MemoizerInterface
      *
      * @param ?DriverInterface $driver The driver to use for memoization.
      */
-    public function __construct(DriverInterface $driver = null)
+    public function __construct(?DriverInterface $driver)
     {
         $this->driver = $driver ?? new MemoryDriver();
     }
@@ -43,7 +43,7 @@ final class Memoizer implements MemoizerInterface
      *
      * @return mixed
      */
-    public function get(?string $key = null)
+    public function get(?string $key)
     {
         return $this->driver->get($key);
     }
@@ -86,7 +86,7 @@ final class Memoizer implements MemoizerInterface
      *
      * @return void
      */
-    public function forget(?string $key = null): void
+    public function forget(?string $key): void
     {
         $this->driver->forget($key);
     }
