@@ -29,7 +29,7 @@ final class Memoizer implements MemoizerInterface
      *
      * @param ?DriverInterface $driver The driver to use for memoization.
      */
-    public function __construct(DriverInterface $driver = null)
+    public function __construct(?DriverInterface $driver = null)
     {
         $this->driver = $driver ?? new MemoryDriver();
     }
